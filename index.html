@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript та DOM</title>
+</head>
+<body>
+    <div id="myDiv" class="highlight">
+        <p>This is a div element with a paragraph inside.</p>
+    </div>
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+    <a href="#" id="myLink">Click me</a>
+
+    <script>
+        // Вибір елементів за їх id, класами, тегами тощо та зміна їхніх властивостей
+        const myDiv = document.getElementById('myDiv');
+        myDiv.style.backgroundColor = 'grey'; // Зміна фону на сірий
+
+        const elementsWithClass = document.getElementsByClassName('highlight');
+        for (const element of elementsWithClass) {
+            element.style.fontWeight = 'bold'; // Зробити текст жирним
+        }
+
+        const listItems = document.querySelectorAll('ul li');
+        for (const listItem of listItems) {
+            listItem.textContent = 'New Item'; // Змінити текст на "New Item"
+        }
+
+        // Заміна чорного тексту на білий та фону на чорний
+        const elementsWithBlackText = document.querySelectorAll('*');
+        for (const element of elementsWithBlackText) {
+            const computedStyle = getComputedStyle(element);
+            const color = computedStyle.color;
+            if (color === 'rgb(0, 0, 0)' || color === '#000' || color === 'black') {
+                element.style.color = 'white'; // Заміна чорного тексту на білий
+            }
+        }
+
+        // Зміна фону на чорний
+        document.body.style.backgroundColor = 'black';
+
+        // Навігація по документу та зміна властивостей
+        const link = document.getElementById('myLink');
+        const parentOfLink = link.parentElement;
+        parentOfLink.style.border = '2px solid grey'; // Додавання сірої рамки
+
+        const firstListItem = listItems[0];
+        const nextSibling = firstListItem.nextElementSibling;
+        nextSibling.style.color = 'blue'; // Зміна кольору на синій
+
+        // Додавання обробників подій
+        link.addEventListener('click', function(event) {
+            event.preventDefault(); // Перешкоджає дії за замовчуванням при кліку на посилання
+            alert('You clicked the link!');
+        });
+
+        myDiv.addEventListener('mouseover', function() {
+            myDiv.style.backgroundColor = 'green'; // Зміна фону на зелений при наведенні
+        });
+
+        myDiv.addEventListener('mouseout', function() {
+            myDiv.style.backgroundColor = 'blue'; // Зміна фону на синій при знятті курсора
+        });
+    </script>
+</body>
+</html>
